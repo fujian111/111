@@ -1,0 +1,86 @@
+AUTO_RESUME: False
+DATA_DIR: ''
+GPUS: (0,)
+LOG_DIR: log
+OUTPUT_DIR: ghost_hrnet_frozen
+PRINT_FREQ: 100
+CUDNN:
+  BENCHMARK: True
+  DETERMINISTIC: True
+  ENABLED: True
+DEBUG:
+  DEBUG: True
+  SAVE_BATCH_IMAGES_GT: False
+  SAVE_BATCH_IMAGES_PRED: False
+  SAVE_HEATMAPS_GT: True
+  SAVE_HEATMAPS_PRED: True
+  SAVE_TAGMAPS_PRED: True
+MODEL:
+  EXTRA:
+    FINAL_CONV_KERNEL: 1
+    PRETRAINED_LAYERS: ['*']
+    STEM_INPLANES: 64
+    STAGE2:
+      NUM_MODULES: 1
+      NUM_BRANCHES: 2
+      BLOCK: BASIC
+      NUM_BLOCKS:
+      - 2
+      - 2
+      NUM_CHANNELS:
+      - 32
+      - 64
+      FUSE_METHOD: SUM
+    STAGE3:
+      NUM_MODULES: 2
+      NUM_BRANCHES: 3
+      BLOCK: BASIC
+      NUM_BLOCKS:
+      - 2
+      - 2
+      - 2
+      NUM_CHANNELS:
+      - 32
+      - 64
+      - 128
+      FUSE_METHOD: SUM
+    STAGE4:
+      NUM_MODULES: 2
+      NUM_BRANCHES: 4
+      BLOCK: BASIC
+      NUM_BLOCKS:
+      - 2
+      - 2
+      - 2
+      - 2
+      NUM_CHANNELS:
+      - 32
+      - 64
+      - 128
+      - 256
+      FUSE_METHOD: SUM
+    DECONV:
+      NUM_DECONVS: 1
+      NUM_CHANNELS:
+      - 32
+      KERNEL_SIZE:
+      - 4
+      NUM_BASIC_BLOCKS: 2
+      CAT_OUTPUT:
+      - True
+  INIT_WEIGHTS: True
+  SCALE_FACTOR: 0
+  WIDTH_MULT: 1.0
+  DEPTH_MULT: 1.0
+  NAME: ghost_hrnet
+  NUM_JOINTS: 17
+  PRETRAINED: '/home/aneri/efficientnetb5-branch/efficientnet-b0-4cfa50.pth'
+  TAG_PER_JOINT: True
+LOSS:
+  NUM_STAGES: 2
+  AE_LOSS_TYPE: exp
+  WITH_AE_LOSS: [True, True]
+  PUSH_LOSS_FACTOR: [0.001, 0.001]
+  PULL_LOSS_FACTOR: [0.001, 0.001]
+  WITH_HEATMAPS_LOSS: [True, True]
+  HEATMAPS_LOSS_FACTOR: [1.0, 1.0]
