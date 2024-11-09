@@ -1,1 +1,3 @@
+#Requirement
+
 Ghost-HRNet is introduced, a lightweight human pose estimation network that combines the efficient feature extraction capabilities of the Ghost module with the multi-scale feature fusion advantages of HRNet. By introducing depthwise separable convolution and convolutional block attention module (CBAM), Ghost-HRNet significantly reduces the number of parameters and computational burden while maintaining high accuracy, making it very suitable for real-time applications. Experimental results show that Ghost-HRNet achieves average accuracy of 66% and 87.26% on the COCO and MPII data sets respectively, while reducing parameter size by 71.3% and computing load by 79.0%.
